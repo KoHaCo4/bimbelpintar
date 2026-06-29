@@ -1,0 +1,137 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(uuid())
+  name      String
+  email     String      @unique
+  password  String
+  role      Role        @default(SISWA)
+  createdAt DateTime    @default(now())
+
+  pembelian Pembelian[]
+   hasilUjian  HasilUjian[] 
+}
+
+model Soal {
+  id          String      @id @default(uuid())
+  judul       String
+  mapel       Mapel
+  kelas       Int
+  deskripsi   String      @db.Text
+  harga       Int
+  jumlahSoal  Int
+  durasi      Int
+  linkPembahasan  String?       // link PDF pembahasan
+  createdAt   DateTime    @default(now())
+
+  pembelian   Pembelian[]
+  pertanyaan      Pertanyaan[]
+  hasilUjian      HasilUjian[]
+}
+
+model Pembelian {
+  id        String    @id @default(uuid())
+  userId    String
+  soalId    String
+  status    Status    @default(PENDING)
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id])
+  soal      Soal      @relation(fields: [soalId], references: [id])
+}
+
+// Model pertanyaan
+model Pertanyaan {
+  id          String        @id @default(uuid())
+  soalId      String
+  urutan      Int           // nomor urut soal (1, 2, 3, dst)
+  tipe        TipeSoal      // PILIHAN_GANDA atau ESSAY
+  pertanyaan  String        @db.Text
+  createdAt   DateTime      @default(now())
+
+  soal        Soal          @relation(fields: [soalId], references: [id], onDelete: Cascade)
+  pilihan     Pilihan[]
+  jawaban     Jawaban[]
+}
+
+// Model pilihan jawaban (hanya untuk pilihan ganda)
+model Pilihan {
+  id            String      @id @default(uuid())
+  pertanyaanId  String
+  huruf         String      // A, B, C, D
+  teks          String      @db.Text
+  isBenar       Boolean     @default(false)
+
+  pertanyaan    Pertanyaan  @relation(fields: [pertanyaanId], references: [id], onDelete: Cascade)
+}
+
+// Model hasil ujian siswa
+model HasilUjian {
+  id          String      @id @default(uuid())
+  userId      String
+  soalId      String
+  skor        Float?      // null kalau belum selesai
+  mulaiAt     DateTime  @default(now())
+  selesaiAt   DateTime?
+  createdAt   DateTime    @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  soal        Soal        @relation(fields: [soalId], references: [id])
+  jawaban     Jawaban[]
+}
+
+// Model jawaban siswa per pertanyaan
+model Jawaban {
+  id            String      @id @default(uuid())
+  hasilUjianId  String
+  pertanyaanId  String
+  jawaban       String      @db.Text  // isi jawaban (huruf untuk PG, teks untuk essay)
+  isBenar       Boolean?    // null untuk essay (dinilai manual)
+  createdAt     DateTime    @default(now())
+
+  hasilUjian    HasilUjian  @relation(fields: [hasilUjianId], references: [id])
+  pertanyaan    Pertanyaan  @relation(fields: [pertanyaanId], references: [id])
+
+  @@unique([hasilUjianId, pertanyaanId])
+}
+
+enum Role {
+  SISWA
+  ADMIN
+}
+
+enum Mapel {
+  MATEMATIKA
+  IPA
+  IPS
+  BAHASA_INDONESIA
+  BAHASA_INGGRIS
+}
+
+enum Status {
+  PENDING
+  SUCCESS
+  FAILED
+  CHALLENGE
+  SETTLEMENT
+  EXPIRE
+  CANCEL
+}
+
+enum TipeSoal {
+  PILIHAN_GANDA
+  ESSAY
+}
