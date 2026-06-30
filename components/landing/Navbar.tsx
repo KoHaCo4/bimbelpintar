@@ -24,7 +24,11 @@ export default function LandingNavbar() {
           </Link>
           {session ? (
             <Link
-              href={session.user.role === "ADMIN" ? "/admin" : "/dashboard"}
+              href={
+                session.user.role === "ADMIN"
+                  ? "/admin/dashboard"
+                  : "/dashboard"
+              }
               className="text-sm bg-blue-600 text-white px-4 py-1.5 rounded-lg hover:bg-blue-700 transition"
             >
               Dashboard
@@ -96,7 +100,11 @@ export default function LandingNavbar() {
           </Link>
           {session ? (
             <Link
-              href={session.user.role === "ADMIN" ? "/admin" : "/dashboard"}
+              href={
+                session.user.role === "ADMIN"
+                  ? "/admin/dashboard"
+                  : "/dashboard"
+              }
               onClick={() => setMenuOpen(false)}
               className="text-sm bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-center"
             >

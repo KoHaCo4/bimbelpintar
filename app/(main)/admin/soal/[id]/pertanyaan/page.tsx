@@ -177,7 +177,7 @@ export default function KelolaPertanyaanPage() {
     <DashboardLayout>
       <div className="max-w-3xl mx-auto px-4 py-8 sm:py-10">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div>
             <Link
               href="/admin/soal"
@@ -185,21 +185,25 @@ export default function KelolaPertanyaanPage() {
             >
               ← Kembali ke admin
             </Link>
-            <h1 className="text-xl font-medium text-gray-900">
+            <h1 className="text-lg sm:text-xl font-medium text-gray-900">
               Kelola Pertanyaan
             </h1>
             <p className="text-sm text-gray-500 mt-1">
               {pertanyaanList.length} pertanyaan
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 sm:flex gap-2">
             <button
               onClick={handleDownloadTemplate}
-              className="text-sm border border-gray-200 text-gray-600 px-4 py-2 rounded-lg hover:bg-gray-50 transition"
+              className="text-sm border border-gray-200 text-gray-600 px-3 sm:px-4 py-2 rounded-lg hover:bg-gray-50 transition"
             >
-              📥 Download template
+              📥{" "}
+              <span className="hidden xs:inline sm:inline">
+                Download template
+              </span>
+              <span className="xs:hidden sm:hidden">Template</span>
             </button>
-            <label className="text-sm bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition cursor-pointer">
+            <label className="text-sm bg-green-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-green-700 transition cursor-pointer text-center">
               {uploading ? "Mengupload..." : "📤 Upload Excel"}
               <input
                 type="file"
@@ -211,7 +215,7 @@ export default function KelolaPertanyaanPage() {
             </label>
             <button
               onClick={() => setShowForm(!showForm)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+              className="col-span-2 sm:col-span-1 bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition"
             >
               {showForm ? "Batal" : "+ Tambah manual"}
             </button>

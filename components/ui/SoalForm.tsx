@@ -85,7 +85,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
           type="text"
           value={form.judul}
           onChange={(e) => setForm({ ...form, judul: e.target.value })}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           placeholder="Contoh: Latihan soal persamaan kuadrat"
         />
       </div>
@@ -98,7 +98,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
           <select
             value={form.mapel}
             onChange={(e) => setForm({ ...form, mapel: e.target.value })}
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           >
             {mapelOptions.map((m) => (
               <option key={m.value} value={m.value}>
@@ -116,7 +116,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
             onChange={(e) =>
               setForm({ ...form, kelas: parseInt(e.target.value) })
             }
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
             min={1}
             max={12}
           />
@@ -128,7 +128,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
         <textarea
           value={form.deskripsi}
           onChange={(e) => setForm({ ...form, deskripsi: e.target.value })}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           rows={3}
           placeholder="Deskripsi singkat tentang soal ini"
         />
@@ -144,7 +144,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
             onChange={(e) =>
               setForm({ ...form, harga: parseInt(e.target.value) || 0 })
             }
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           />
         </div>
 
@@ -159,7 +159,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
             onChange={(e) =>
               setForm({ ...form, jumlahSoal: parseInt(e.target.value) })
             }
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           />
         </div>
 
@@ -174,7 +174,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
             onChange={(e) =>
               setForm({ ...form, durasi: parseInt(e.target.value) })
             }
-            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+            className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           />
         </div>
       </div>
@@ -187,7 +187,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
           type="text"
           value={form.linkPembahasan}
           onChange={(e) => setForm({ ...form, linkPembahasan: e.target.value })}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           placeholder="https://drive.google.com/..."
         />
       </div>
@@ -197,7 +197,7 @@ export default function MapelForm({ initialData, mode }: SoalFormProps) {
           type="text"
           value={form.linkPembahasan}
           onChange={(e) => setForm({ ...form, linkPembahasan: e.target.value })}
-          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-400"
+          className="w-full border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm outline-none focus:border-blue-400"
           placeholder="https://drive.google.com/..."
         />
       </div> */}
