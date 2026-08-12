@@ -39,7 +39,7 @@ export default function KatalogPage() {
 
     const res = await fetch(`/api/soal?${params.toString()}`);
     const data = await res.json();
-    setSoalList(data);
+    setSoalList(Array.isArray(data) ? data : []);
     setLoading(false);
   };
 
